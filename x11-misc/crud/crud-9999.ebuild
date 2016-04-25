@@ -5,7 +5,7 @@
 EAPI=6
 inherit git-r3
 
-DESCRIPTION="X region selection information tool"
+DESCRIPTION="C Rectangular oUtline Drawer - Prints the geometry of a selected region in x11"
 HOMEPAGE="https://github.com/rxse/crud"
 SRC_URI=""
 EGIT_REPO_URI="git://github.com/rxse/crud"
