@@ -3,6 +3,7 @@
 # $Id$
 
 EAPI=5
+inherit eutils
 
 if [[ ${PV} = 9999 ]]; then
 	inherit git-2
@@ -26,6 +27,11 @@ RDEPEND="app-admin/sysstat
 DEPEND="${RDEPEND}
 	app-text/ronn
 	"
+
+src_prepare() {
+	EPATCH_OPTS="--ignore-whitespace" \
+	epatch "${FILESDIR}/${PN}-9999-r1-colorfix.patch"
+}
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="/usr" install
