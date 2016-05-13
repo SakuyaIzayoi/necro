@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>ag@lichfor.me</email>
+		<name>Alessandro Gangemi</name>
+	</maintainer>
+	<use>
+		<flag name="24-bit-color">Enable 24-bit color support</flag>
+		<flag name="xft">Enable rendering Xft fonts</flag>
+		<flag name="unicode3">Use 21 instead of 16 bits to represent unicode characters</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">spudowiar/rxvt-unicode</remote-id>
+	</upstream>
+</pkgmetadata>
