@@ -14,13 +14,15 @@ EGIT_BRANCH="24bit"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+24-bit-color xft unicode3"
+IUSE="+24-bit-color +font-styles +perl pixbuf xft unicode3"
 
 RDEPEND="
 	media-libs/fontconfig
 	sys-libs/ncurses:*
 	x11-libs/libX11
 	x11-libs/libXrender
+	perl? ( dev-lang/perl:= )
+	pixbuf? ( x11-libs/gdk-pixbuf x11-libs/gtk+:2 )
 	xft? ( x11-libs/libXft )
 "
 
@@ -44,6 +46,9 @@ src_configure() {
 	local myconf=''
 	econf --enable-everything \
 	$(use_enable 24-bit-color) \
+	$(use_enable font-styles) \
+	$(use_enable perl) \
+	$(use_enable pixbuf) \
 	$(use_enable xft) \
 	$(use_enable unicode3)
 	${myconf}
