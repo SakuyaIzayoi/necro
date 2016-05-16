@@ -55,11 +55,19 @@ src_configure() {
 	${myconf}
 }
 
+src_compile() {
+	emake || die "emake failed"
+
+	sed -i \
+		-e 's/RXVT_BASENAME = "rxvt"/RXVT_BASENAME = "urxvt"/' \
+		"${S}"/doc/rxvt-tabbed || die "tabs sed failed"
+}
+
 src_install() {
 	default
 
 	dodoc \
-		Changes INSTALL MANIFEST README.FAQ README.configure
+		README.FAQ Changes doc/README* doc/changes.txt doc/etc/* doc/rxvt-tabbed
 
 	make_desktop_entry urxvt rxvt-unicode utilities-terminal \
 		"System;TerminalEmulator"
