@@ -45,12 +45,13 @@ src_prepare() {
 src_configure() {
 	local myconf=''
 	econf --enable-everything \
+		  --with-term=rxvt-unicode-24bit \
 	$(use_enable 24-bit-color) \
 	$(use_enable font-styles) \
 	$(use_enable perl) \
 	$(use_enable pixbuf) \
 	$(use_enable xft) \
-	$(use_enable unicode3)
+	$(use_enable unicode3) \
 	${myconf}
 }
 
