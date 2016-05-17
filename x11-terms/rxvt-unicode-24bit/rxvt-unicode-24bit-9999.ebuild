@@ -14,7 +14,7 @@ EGIT_BRANCH="24bit"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+24-bit-color +font-styles +perl pixbuf xft unicode3"
+IUSE="+24-bit-color +256-color +font-styles +perl pixbuf xft unicode3"
 
 RDEPEND="
 	media-libs/fontconfig
@@ -46,6 +46,7 @@ src_configure() {
 	local myconf=''
 	econf --enable-everything \
 	$(use_enable 24-bit-color) \
+	$(use_enable 256-color) \
 	$(use_enable font-styles) \
 	$(use_enable perl) \
 	$(use_enable pixbuf) \
