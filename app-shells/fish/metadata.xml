@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>ag@lichfor.me</email>
+		<name>Alessandro Gangemi</name>
+	</maintainer>
+	<use>
+		<flag name="X">Enable X support</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">fish-shell/fish-shell</remote-id>
+	</upstream>
+</pkgmetadata>
