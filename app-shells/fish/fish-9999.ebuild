@@ -28,7 +28,6 @@ src_prepare() {
 }
 
 src_configure() {
-	eautoconf
 	econf \
 		docdir="${EPREFIX}/usr/share/doc/${PF}" \
 		--bindir="${EPREFIX}/bin"
