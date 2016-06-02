@@ -4,6 +4,8 @@
 
 EAPI=6
 
+PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+
 inherit autotools git-r3
 
 DESCRIPTION="fish is the Friendly Interactive SHell"
