@@ -22,6 +22,11 @@ DEPEND="sys-libs/ncurses
 	X? ( x11-misc/xsel )"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	eautoconf
+	default
+}
+
 src_configure() {
 	eautoconf
 	econf \
