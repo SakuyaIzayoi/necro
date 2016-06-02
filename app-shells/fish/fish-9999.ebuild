@@ -23,7 +23,7 @@ DEPEND="sys-libs/ncurses
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	autoconf
+	eautoconf
 	econf \
 		docdir="${EPREFIX}/usr/share/doc/${PF}" \
 		--bindir="${EPREFIX}/bin"
