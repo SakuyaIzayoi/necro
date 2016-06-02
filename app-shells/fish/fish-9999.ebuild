@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="X"
 
-DEPEND="sys-libs/ncurses
+DEPEND="sys-libs/ncurses:*
 	sys-devel/bc
 	sys-devel/gettext
 	X? ( x11-misc/xsel )"
