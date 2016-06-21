@@ -30,3 +30,4 @@ before_script:
     - cd travis-overlay
 script:
     - ./../spinner.sh "python ../portage-${PORTAGE_VER}/bin/repoman full -d"
+# You can append own scripts after this line
