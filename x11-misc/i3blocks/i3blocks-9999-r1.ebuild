@@ -23,7 +23,7 @@ fi
 SLOT="0"
 LICENSE="GPL-3"
 RDEPEND="app-admin/sysstat
-	x11-wm/i3"
+	x11-wm/i3-gaps"
 DEPEND="${RDEPEND}
 	app-text/ronn
 	"
