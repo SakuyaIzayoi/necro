@@ -29,8 +29,7 @@ DEPEND="${RDEPEND}
 	"
 
 src_prepare() {
-	EPATCH_OPTS="--ignore-whitespace" \
-	epatch "${FILESDIR}/${PN}-9999-r1-colorfix.patch"
+	epatch_user
 }
 
 src_install() {
