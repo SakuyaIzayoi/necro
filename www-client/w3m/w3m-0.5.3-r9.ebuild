@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-inherit autotools eutils
+inherit autotools eutils prefix
 
 DESCRIPTION="Text based WWW browser, supports tables and frames"
 HOMEPAGE="http://w3m.sourceforge.net/"
@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/w3m/${P}.tar.gz"
 LICENSE="w3m"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="X fbcon gpm gtk imlib lynxkeymap migemo nls nntp ssl unicode vanilla xface l10n_ja"
+IUSE="X fbcon gpm gtk imlib libressl lynxkeymap nls nntp ssl unicode vanilla xface l10n_ja"
 
 # We cannot build w3m with gtk+2 w/o X because gtk+2 ebuild doesn't
 # allow us to build w/o X, so we have to give up framebuffer w3mimg....
@@ -26,8 +26,10 @@ RDEPEND=">=sys-libs/ncurses-5.2-r3:0=
 	!gtk? ( imlib? ( >=media-libs/imlib2-1.1.0[X] ) )
 	xface? ( media-libs/compface )
 	gpm? ( >=sys-libs/gpm-1.19.3-r5 )
-	migemo? ( app-dicts/migemo-dict )
-	ssl? ( >=dev-libs/openssl-0.9.6b:0= )"
+	ssl? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
@@ -39,6 +41,7 @@ src_prepare() {
 		"${FILESDIR}/${PN}-0.5.3-underlinking.patch" \
 		"${FILESDIR}/${PN}-0.5.3-tinfo.patch" \
 		"${FILESDIR}/${PN}-0.5.3-gettext.patch" \
+		"${FILESDIR}/${PN}-0.5.3-remove-EGD.patch" \
 		"${FILESDIR}/${PN}-0.5.3-rgba.patch"
 	use vanilla || \
 		epatch "${FILESDIR}"/${PN}-0.5.3-button.patch \
@@ -47,11 +50,12 @@ src_prepare() {
 			"${FILESDIR}"/${P}-url-schema.patch
 	ecvs_clean
 	sed -i -e "/^AR=/s/ar/$(tc-getAR)/" {.,w3mimg,libwc}/Makefile.in || die
+	hprefixify acinclude.m4
 	eautoconf
 }
 
 src_configure() {
-	local myconf migemo_command imagelibval imageval
+	local myconf imagelibval imageval
 
 	if use gtk ; then
 		imagelibval="gtk2"
@@ -62,12 +66,6 @@ src_configure() {
 	if [ ! -z "${imagelibval}" ] ; then
 		use X && imageval="${imageval}${imageval:+,}x11"
 		use X && use fbcon && imageval="${imageval}${imageval:+,}fb"
-	fi
-
-	if use migemo ; then
-		migemo_command="migemo -t egrep ${EPREFIX}/usr/share/migemo/migemo-dict"
-	else
-		migemo_command="no"
 	fi
 
 	# emacs-w3m doesn't like "--enable-m17n --disable-unicode,"
@@ -99,7 +97,7 @@ src_configure() {
 		--with-termlib=yes \
 		--enable-image=${imageval:-no} \
 		--with-imagelib="${imagelibval:-no}" \
-		--with-migemo="${migemo_command}" \
+		--without-migemo \
 		--enable-m17n \
 		--enable-unicode \
 		$(use_enable gpm mouse) \
